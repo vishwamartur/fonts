@@ -9,6 +9,10 @@ prefix="$1"
 if test "$(uname)" = "Darwin" ; then
   # MacOS
   font_dir="$HOME/Library/Fonts"
+  # Disable font smoothing on macOS 13 Ventura
+  if [[ $(sw_vers -productVersion) == 13.* ]]; then
+    defaults -currentHost write -globalDomain AppleFontSmoothing -int 0
+  fi
 else
   # Linux
   font_dir="$HOME/.local/share/fonts"
@@ -23,6 +27,11 @@ find "$powerline_fonts_dir" \( -name "$prefix*.[ot]tf" -or -name "$prefix*.pcf.g
 if which fc-cache >/dev/null 2>&1 ; then
     echo "Resetting font cache, this may take a moment..."
     fc-cache -f "$font_dir"
+fi
+
+# Enable font smoothing on macOS 13 Ventura
+if test "$(uname)" = "Darwin" && [[ $(sw_vers -productVersion) == 13.* ]]; then
+  defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
 fi
 
 echo "Powerline fonts installed to $font_dir"

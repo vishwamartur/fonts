@@ -9,6 +9,10 @@ prefix="$1"
 if test "$(uname)" = "Darwin" ; then
   # MacOS
   font_dir="$HOME/Library/Fonts"
+  # Re-enable font smoothing on macOS 13 Ventura
+  if [[ $(sw_vers -productVersion) == 13.* ]]; then
+    defaults -currentHost write -globalDomain AppleFontSmoothing -int 1
+  fi
 else
   # Linux
   font_dir="$HOME/.local/share/fonts"
