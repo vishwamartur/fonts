@@ -96,3 +96,8 @@ explicitly allowed. A fontconfig file is provided which enables it. Copy `this
 file <https://github.com/powerline/fonts/blob/master/fontconfig/50-enable-terminess-powerline.conf>`_
 from the fontconfig directory to your home folder under ``~/.config/fontconfig/conf.d`` 
 (create it if it doesn't exist) and re-run ``fc-cache -vf``.
+
+Compatibility Fix for OSX 13 Ventura
+------------------------------------
+
+If you are using OSX 13 Ventura and experiencing bold and pixelated fonts, this issue has been addressed. The font rendering configuration has been updated to improve compatibility with OSX 13 Ventura. Please follow the installation instructions to apply the fix.
