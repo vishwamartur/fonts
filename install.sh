@@ -9,6 +9,12 @@ prefix="$1"
 if test "$(uname)" = "Darwin" ; then
   # MacOS
   font_dir="$HOME/Library/Fonts"
+elif grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+  # WSL Ubuntu
+  font_dir="$HOME/.local/share/fonts"
+  mkdir -p $font_dir
+  sudo apt-get update
+  sudo apt-get install -y fonts-powerline
 else
   # Linux
   font_dir="$HOME/.local/share/fonts"
